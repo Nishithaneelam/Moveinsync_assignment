@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data</title>
+</head>
+<style>
+
+    table ,td, th {
+        border: 1px solid black;
+        text-align: center;
+        padding: 3px 7px;
+        font-size: 22px;
+    }
+    td{
+        font-size: 18px;
+    }
+    table{
+        border-collapse: collapse;
+        width: 80%;
+        margin: 2rem auto 5px auto;
+    }
+    .btns{
+    display: block;
+    margin-left: auto;
+    padding: 0.75rem 2rem;
+    outline: none;
+    border:none;
+    background-color: #1A73E8;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    }
+    .bt{
+        margin: 2rem auto 5px auto;
+    
+        width: 80%; 
+    }
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  display: flex;
+  justify-content: center;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 1% auto; 
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+*,::before,::after{
+    box-sizing: border-box;
+
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+}
+h1{
+    margin: 0;
+
+}
+
+.form{
+    width: 360px;
+    padding: 4rem 2rem;
+    border-radius: 1rem ;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(92,99,105,0.2);
+}
+
+.form-title{
+    font-size: 400;
+    margin-bottom: 3rem ;
+
+}
+.form-content{
+    position: relative;
+    height: 48px;
+    margin-bottom: 1.5rem;
+}
+
+.form-input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 1rem ;
+    border: 1px solid  #DADCE0;
+    border-radius: 0.5rem;
+    outline: none;
+    padding: 1rem;
+    background: none;
+    z-index: 1;
+}
+.form-input .select{
+    padding: 0;
+    font-size: 0.5rem ;
+}
+
+
+.form-label{
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    padding: 0 0.25rem;
+    background-color: #fff;
+    color: black;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+.form-button{
+    display: block;
+    margin-left: auto;
+    padding: 0.75rem 2rem;
+    outline: none;
+    border:none;
+    background-color: #1A73E8;
+    color: white;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.form-button:hover{
+    box-shadow: 0 10px 36px rgba(0,0,0,0.15);
+}
+.form-input:focus + .form-label{
+    top: -0.5rem;
+    left: 0.8rem;
+    color:  #1A73E8;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 20;
+}
+
+.form-input:not(:placeholder-shown).form-input:not(:focus)+ .form-label{
+    top: -0.5rem;
+    left: 0.8rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    z-index: 20;
+}
+
+.form-input:focus{
+    border: 1.5px solid #1A73E8;
+}
+ 
+</style>
+<body>
+
+    <table id="display">
+        <tr>
+            <th>Name</th>
+            <th>Id</th>
+            <th>City</th>
+            <th>Degree</th>
+            <th>Timestamp</th>
+        </tr>
+    </table>
+   <div class="bt">
+        <button id="myBtn" class="btns">Add User</button>
+   </div>
+
+<div id="myModal" class="modal">
+
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form action="" class="form" id="form">
+        <h1 class="form-title">Add User</h1>
+        <div class="form-content">
+            <input type="text" class="form-input" id="name" name="name" placeholder=" ">
+            <label for="" class="form-label">Name</label>
+        </div>
+        <div class="form-content">
+            <select name="City" class="form-input select" id="city" >
+                <option value="bengaluru">Bengaluru</option>
+                <option value="chennai">Chennai</option>
+                <option value="delhi">Delhi</option>
+                <option value="mumbai">Mumbai</option>
+              </select>
+            <label for="" class="form-label" >City</label>
+        </div>
+        <div class="form-content">
+            <input type="text" class="form-input" id="degree" name="degree" placeholder=" ">
+            <label for="" class="form-label">Degree</label>
+        </div>
+
+        <input type="button" class="form-button" id="button" value="Add" onclick="data()"> 
+    </form>
+  </div>
+
+</div>
+<script>
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+
+var row=1;
+var x = 0;
+
+function data(){
+    var name = document.getElementById('name').value;
+
+    var city = document.getElementById('city').value;
+    var id = ++x;
+    var degree = document.getElementById('degree').value;
+    var date = new Date();
+    var display = document.getElementById('display');
+    var newRow = display.insertRow(row);
+
+    var cell1 = newRow.insertCell(0)
+    var cell2 = newRow.insertCell(1)
+    var cell3 = newRow.insertCell(2);
+    var cell4 = newRow.insertCell(3);
+    var cell5 = newRow.insertCell(4)
+
+    cell1.innerHTML = name;
+    cell2.innerHTML = id;
+    cell3.innerHTML = city;
+    cell4.innerHTML = degree;
+    cell5.innerHTML = date;
+    console.log(Date.now())
+    console.log(degree)
+    console.log(city)
+    const now = new Date();
+    console.log(now)
+    
+    row++;
+    modal.style.display = "none";
+    function newFunction() {
+        document.getElementById("form").reset();
+    }
+     newFunction();
+}
+</script>
+</body>
+</html>
